@@ -1,6 +1,6 @@
 import { todolist } from './todolist'
 import { projectList } from './projectlist'
-import { initView } from './view'
+import { controllerObj } from './controller'
 
 
 window.onload = function(){
@@ -16,5 +16,5 @@ window.onload = function(){
 
     console.log(testproject);
 
-    initView();
+    controllerObj();
 }
