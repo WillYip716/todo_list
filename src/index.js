@@ -1,14 +1,20 @@
 import { todolist } from './todolist'
 import { projectList } from './projectlist'
+import { initView } from './view'
 
 
-const testlist = todolist("testtitle", "testdesc", "testdue","testpriority");
+window.onload = function(){
 
-const testproject = projectList("testproject");
-testproject.todos.push(testlist);
+    const testlist = todolist("testtitle", "testdesc", "testdue","testpriority");
 
-console.log(testlist);
+    const testproject = projectList("testproject");
+    testproject.todos.push(testlist);
 
-testlist.dueDate = "new duedate";
+    console.log(testlist);
 
-console.log(testproject);
+    testlist.dueDate = "new duedate";
+
+    console.log(testproject);
+
+    initView();
+}

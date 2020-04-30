@@ -1,5 +1,5 @@
 
-const projectList = (title,) => {
+const projectList = (title) => {
     let todos = [];
     return { title, todos };
   };
