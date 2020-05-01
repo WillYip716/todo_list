@@ -24,9 +24,18 @@ const initView = function(controllerlist){
 
 
     const createProject = function(obj, index){
+        let a = document.getElementById("todoview");
+        if(parseInt(a.getAttribute("project-index")) > -1){
+            a = parseInt(a.getAttribute("project-index"));
+        }
+
+
         let p = document.createElement("div");
         p.innerHTML = obj.title;
         p.classList.add("projectnode");
+        if(a == index){
+            p.classList.add("selected");
+        }
         let b = document.createElement("button");
         b.innerHTML = "x";
         b.classList.add("deleteproject");
@@ -67,7 +76,12 @@ const initView = function(controllerlist){
                 p.appendChild(y);
                 p.appendChild(z);
                 tV.appendChild(p);
-            }  
+            }
+            
+            let addTodo = document.createElement("button");
+            addTodo.innerHTML = "Add New To Do";
+            addTodo.id = "addtodo";
+            tV.appendChild(addTodo);
         }    
     }
 
@@ -81,13 +95,8 @@ const initView = function(controllerlist){
     addProject.innerHTML = "Add New Project";
     addProject.id = "addproject";
 
-    let addTodo = document.createElement("button");
-    addTodo.innerHTML = "Add New To Do";
-    addTodo.id = "addtodo";
-
+    
     pV.appendChild(addProject);
-    tV.appendChild(addTodo);
-
 }
 
 export { initView }

@@ -33,3 +33,30 @@
 .tododiv{
     border: 2px solid black;
 }
+
+.projectnode{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.selected{
+    background-color: lightgreen;
+}
+
+.editproject{
+    float: right;
+}
+
+.deleteproject{
+    float: right;
+    border-radius: 50%;
+}
+
+.edittodo{
+    float: right;
+}
+
+.deletetodo{
+    float: right;
+    border-radius: 50%;
+}

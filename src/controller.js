@@ -44,8 +44,11 @@ const controllerObj = function(){
         setListeners();
     }
 
-    const deletePro = function(index){
+    const deletePro = function(index,e){
+        e.stopPropagation();
         controllerList.splice(index, 1);
+        let z = document.getElementById("todoview");
+        z.setAttribute("project-index", "stop");
         initView(controllerList);
         setListeners();
     }
@@ -82,13 +85,16 @@ const controllerObj = function(){
         }
 
         let addtd = document.getElementById("addtodo");
-        addtd.onclick = function(){
-            addToDo(prompt("Name To do"),prompt("Description"),prompt("Due Date"),prompt("Priority"));
+        if(addtd){
+            addtd.onclick = function(){
+                addToDo(prompt("Name To do"),prompt("Description"),prompt("Due Date"),prompt("Priority"));
+            }
         }
+        
 
         let editpros = document.getElementsByClassName("editproject");
         for(let a = 0; a <editpros.length; a++){
-            console.log(a);
+            //console.log(a);
             editpros[a].onclick = function(){
                 editPro(a);
             }
@@ -96,8 +102,8 @@ const controllerObj = function(){
 
         let deletePros = document.getElementsByClassName("deleteproject");
         for(let a = 0; a <deletePros.length; a++){
-            deletePros[a].onclick = function(){
-                deletePro(a);
+            deletePros[a].onclick = function(e){
+                deletePro(a,e);
             }
         }
 
