@@ -4,7 +4,15 @@ import { initView } from './view'
 
 
 const controllerObj = function(){
+
+
     let controllerList = [];
+    console.log(controllerList.length);
+    console.log(localStorage.getItem("storelist"));
+    if(localStorage.getItem("storelist")){
+        controllerList = JSON.parse(localStorage.getItem("storelist"));
+    }
+    localStorage.removeItem("storelist");
 
     const testVIew = function(){
         let firstPro = projectList("FIrst project");
@@ -22,16 +30,14 @@ const controllerObj = function(){
     const addProject = function(title){
         let a = projectList(title);
         controllerList.push(a);
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const addToDo = function(title, description, duedate, priority){
         let proInd = parseInt(document.getElementById("todoview").getAttribute("project-index"));
         let a = todolist(title, description, duedate, priority);
         controllerList[proInd].todos.push(a);
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const getList = function(){
@@ -40,8 +46,7 @@ const controllerObj = function(){
 
     const editPro = function(index){
         controllerList[index].title = prompt("New Title");
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const deletePro = function(index,e){
@@ -49,8 +54,7 @@ const controllerObj = function(){
         controllerList.splice(index, 1);
         let z = document.getElementById("todoview");
         z.setAttribute("project-index", "stop");
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const editTodo = function(index){
@@ -59,20 +63,23 @@ const controllerObj = function(){
         controllerList[proInd].todos[index].description = prompt("New description");
         controllerList[proInd].todos[index].dueDate = prompt("New due date");
         controllerList[proInd].todos[index].priority = prompt("New Priority");
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const deleteTodo = function(index){
         let proInd = parseInt(document.getElementById("todoview").getAttribute("project-index"));
         controllerList[proInd].todos.splice(index, 1);
-        initView(controllerList);
-        setListeners();
+        set();
     }
 
     const selectProject = function(index){
         let z = document.getElementById("todoview");
         z.setAttribute("project-index", index);
+        set();
+    }
+
+    const set = function(){
+        localStorage.setItem("storelist",JSON.stringify(controllerList));
         initView(controllerList);
         setListeners();
     }
@@ -127,9 +134,15 @@ const controllerObj = function(){
                 selectProject(a);
             }
         }
+
+        
     }
 
-    testVIew();
+
+    if(controllerList.length == 0){
+        testVIew();
+    }
+    
 
     initView(controllerList);
 
